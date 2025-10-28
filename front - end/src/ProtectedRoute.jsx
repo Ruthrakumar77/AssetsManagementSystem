@@ -1,0 +1,19 @@
+import { Navigate } from 'react-router-dom'
+import { useAuth } from './contexts/AuthContext'
+
+function ProtectedRoute(props) {
+    // verify the auth
+    const { user, loading } = useAuth()
+
+    if (loading) return <h1>Loading......,,,,</h1>
+
+    if (!user) return <Navigate to={"/login"} replace />
+
+    return (
+        <>
+            {props.children}
+        </>
+    )
+}
+
+export default ProtectedRoute
