@@ -9,7 +9,7 @@ import { Assets } from './components/Home/Assets'
 import Employees from './components/Home/Employees'
 import { AssignedAssets } from './components/Home/AssignedAssets'
 import { Toaster } from 'react-hot-toast'
-import { Admins } from './components/Home/Admins'
+import Admins from './components/Home/Admins'
 import { Requests } from './components/Home/Requests'
 import { MyAssets } from './components/Home/MyAssets'
 

@@ -53,36 +53,3 @@ export const Sidebar = () => {
         </>
     )
 }
-
-
-
-
-// let RouteLinks = [
-// {
-// role:"employee",links:[{label:"Dashboard",path:"/"},{label:"Employee",path:"/employees"},
-// {label:"MyAssets",path:"/myAssets"},{label:"Requests",path:"/requests"}]
-// },
-
-// {
-// role:"employee",links:[{label:"Dashboard",path:"/"},{label:"Employee",path:"/employees"},
-// {label:"MyAssets",path:"/myAssets"},{label:"Assigned Assets",path:"/assigned-assets"},
-// {label:"Requests",path:"/requests"}]
-// },
-
-// {
-// role:"employee",links:[{label:"Dashboard",path:"/"},{label:"Admins",path:"/admins"},
-// {label:"Employee",path:"/employees"},{label:"Assigned Assets",path:"/assigned-assets"},
-// {label:"Assets",path:"/assets"},{label:"Requests",path:"/requests"}]
-// }
-// ]
-
-
-// let links = RouteLinks.find((weblink) => weblink.role === user.role)?.links
-
-// <div>
-    // {
-        // links.map(myLink => {
-            // return <Link to={'myLink.path'} key={myLink.label}>{myLink.label}</Link>
-        // }) 
-    // }
-// </div>
