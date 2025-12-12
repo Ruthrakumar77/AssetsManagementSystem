@@ -1,3 +1,151 @@
+// import React, { useEffect, useState } from "react";
+// import axios from "axios";
+// import { AdminEditModel } from "../AdminEditModel";
+
+// const Admins = () => {
+//     const [admin, setAdmin] = useState([]);
+//     const [isModalOpen, setIsModalOpen] = useState(false);
+//     const [editAdmin, setEditAdmin] = useState({});
+
+//     const fetchAdmin = async () => {
+//         try {
+//             const response = await axios.get(
+//                 "http://localhost:8080/api/v1/user/read/admins",
+//                 { withCredentials: true }
+//             );
+
+//             setAdmin(response.data);
+//         } catch (error) {
+//             console.log(error);
+//         }
+//     };
+
+//     useEffect(() => {
+//         fetchAdmin();
+//     }, []);
+
+//     const handleModelOpen = (adminData) => {
+//         setEditAdmin(adminData);
+//         setIsModalOpen(true);
+//     };
+
+//     const handleModelClose = () => {
+//         setEditAdmin({});
+//         setIsModalOpen(false);
+//         fetchAdmin(); // refresh after closing modal
+//     };
+
+//     const addAdminModel = () => {
+//         setEditAdmin({ role: "admin" }); // default role for add admin
+//         setIsModalOpen(true);
+//     };
+
+//     const handleDelete = async (id) => {
+//         if (!window.confirm("Are you sure want to delete this Admin ?")) return;
+
+//         try {
+//             await axios.delete(
+//                 "http://localhost:8080/api/v1/user/delete/admin",
+//                 {
+//                     withCredentials: true,
+//                     headers: { userid: id }
+//                 }
+//             );
+//             fetchAdmin();
+//         } catch (error) {
+//             console.log("Error deleting Admin : ", error);
+//         }
+//     };
+
+//     return (
+//         <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
+
+//             {/* Top Bar */}
+//             <div className="flex items-center justify-between py-4 bg-white dark:bg-gray-900">
+//                 <div className="relative">
+//                     <input
+//                         type="text"
+//                         id="table-search-users"
+//                         className="block pt-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50"
+//                         placeholder="Search for admins"
+//                     />
+//                 </div>
+
+//                 <button
+//                     className="text-md text-white bg-blue-500 hover:bg-white hover:text-blue-500 py-2 px-2 rounded-sm border border-blue-400"
+//                     onClick={addAdminModel}
+//                 >
+//                     ADD ADMIN
+//                 </button>
+//             </div>
+
+//             {/* Table */}
+//             <table className="w-full text-sm text-left text-gray-500">
+//                 <thead className="text-xs text-gray-700 uppercase bg-gray-50">
+//                     <tr>
+//                         <th className="px-6 py-3">Name</th>
+//                         <th className="px-6 py-3">Department</th>
+//                         <th className="px-6 py-3">Contact No</th>
+//                         <th className="px-6 py-3">Status</th>
+//                         <th className="px-6 py-3">Action</th>
+//                     </tr>
+//                 </thead>
+
+//                 <tbody>
+//                     {admin.map((admin) => (
+//                         <tr key={admin._id} className="bg-white border-b">
+//                             <th className="flex items-center px-6 py-4 text-gray-900">
+//                                 <div className="ps-3">
+//                                     <div className="text-base font-semibold">{admin.name}</div>
+//                                     <div className="font-normal text-gray-500">{admin.email}</div>
+//                                 </div>
+//                             </th>
+//                             <td className="px-6 py-4">
+//                                 <div className="text-base font-semibold">{admin.department}</div>
+//                                 <div className="font-normal text-gray-500">{admin.designation}</div>
+//                             </td>
+//                             <td className="px-6 py-4">{admin.mobile}</td>
+
+//                             <td className="px-6 py-4">
+//                                 <div className="flex items-center">
+//                                     <div className="h-2.5 w-2.5 rounded-full bg-green-500 me-2"></div>
+//                                     {admin.status}
+//                                 </div>
+//                             </td>
+
+//                             <td className="px-6 py-4 flex gap-4">
+//                                 <button
+//                                     className="text-md text-white bg-blue-500 py-2 px-2 rounded-full"
+//                                     onClick={() => handleModelOpen(admin)}
+//                                 >
+//                                     Edit user
+//                                 </button>
+
+//                                 <button
+//                                     className="text-md text-white bg-red-500 py-2 px-2 rounded-full"
+//                                     onClick={() => handleDelete(admin._id)}
+//                                 >
+//                                     Delete
+//                                 </button>
+//                             </td>
+//                         </tr>
+//                     ))}
+//                 </tbody>
+//             </table>
+
+//             {isModalOpen && (
+//                 <AdminEditModel
+//                     handleModelClose={handleModelClose}
+//                     editAdmin={editAdmin}
+//                 />
+//             )}
+//         </div>
+//     );
+// };
+
+// export default Admins;
+
+
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { AdminEditModel } from "../AdminEditModel";
@@ -13,6 +161,8 @@ const Admins = () => {
                 "http://localhost:8080/api/v1/user/read/admins", // removed space before http
                 { withCredentials: true }
             );
+            console.log(response.data)
+
             setAdmin(response.data);
         } catch (error) {
             console.log(error);
@@ -144,7 +294,7 @@ const Admins = () => {
             </table>
 
             {isModalOpen && (
-                <AdminEditModel handleModelClose={handleModelClose} editEmployee={editAdmin} />
+                <AdminEditModel handleModelClose={handleModelClose} editAdmin={editAdmin} />
             )}
         </div>
     );

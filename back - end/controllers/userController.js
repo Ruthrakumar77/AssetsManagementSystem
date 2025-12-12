@@ -1,33 +1,68 @@
 import User from "../models/User.js"
 import { comparePassword, createHash } from "../utils/bcrypt.js"
 
+// export async function addUser(req, res) {
+//     try {
+//         // body data
+//         const { name, email, mobile } = req.body
+//         if (name && email && mobile) {
+//             const isUser = await User.findOne({ email })
+
+
+//             if (isUser) {
+//                 return res.status(400).send({ message: "User Already Exists" })
+//             } else {
+//                 // add
+//                 const hashedPassword = createHash("mypassword@#$!")
+//                 const userDetails = new User({ ...req.body, password: hashedPassword })
+//                 await userDetails.save()
+//                 return res.status(201).send({ message: "User Created" })
+//             }
+//         } else {
+//             return res.status(400).send({ message: "Provide all required fields" })
+//         }
+//     } catch (error) {
+//         return res.status(500).send({
+//             message: "Something went wrong",
+//             error: error.message
+//         })
+//     }
+// }
 export async function addUser(req, res) {
     try {
-        // body data
-        const { name, email, mobile } = req.body
-        if (name && email && mobile) {
-            const isUser = await User.findOne({ email })
+        const { name, email, mobile, role } = req.body;
 
+        if (name && email && mobile) {
+            const isUser = await User.findOne({ email });
 
             if (isUser) {
-                return res.status(400).send({ message: "User Already Exists" })
+                return res.status(400).send({ message: "User Already Exists" });
             } else {
-                // add
-                const hashedPassword = createHash("mypassword@#$!")
-                const userDetails = new User({ ...req.body, password: hashedPassword })
-                await userDetails.save()
-                return res.status(201).send({ message: "User Created" })
+                const hashedPassword = createHash("mypassword@#$!");
+
+                const userDetails = new User({
+                    name,
+                    email,
+                    mobile,
+                    role: role || "employee",
+                    password: hashedPassword
+                });
+
+                await userDetails.save();
+
+                return res.status(201).send({ message: "User Created" });
             }
         } else {
-            return res.status(400).send({ message: "Provide all required fields" })
+            return res.status(400).send({ message: "Provide all required fields" });
         }
     } catch (error) {
         return res.status(500).send({
             message: "Something went wrong",
             error: error.message
-        })
+        });
     }
 }
+
 
 export async function updateUser(req, res) {
     try {
