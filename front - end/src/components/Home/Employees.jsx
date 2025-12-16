@@ -40,9 +40,9 @@ const Employees = () => {
     }
 
     const handleDelete = async (id) => {
-        // if (!window.confirm("Are you sure want to delete this Employee ?")) return;
+        if (!window.confirm("Are you sure want to delete this Employee ?")) return;
         try {
-            toast.loading("Deleting........"), { id: "delete" }
+            // toast.loading("Deleting........"), { id: "delete" }
             await axios.delete("http://localhost:8080/api/v1/user/delete/employee",
                 { withCredentials: true, headers: { userid: id } })
             fetchEmployees()  // refresh after delete
@@ -135,8 +135,10 @@ const Employees = () => {
                                 <td className="px-6 py-4">{employee.mobile}</td>
                                 <td className="px-6 py-4">
                                     <div className="flex items-center">
-                                        <div className="h-2.5 w-2.5 rounded-full bg-green-500 me-2"></div>
-                                        Active
+                                        <div className={`h-2.5 w-2.5 rounded-full me-2
+                                        ${employee.status === "active" ? "bg-green-500" : "bg-red-500"}`}>
+                                        </div>
+                                        {employee.status}
                                     </div>
                                 </td>
                                 <td className="px-6 py-4 flex w-full justify-start gap-4">

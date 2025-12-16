@@ -239,7 +239,7 @@ export const AdminEditModel = ({ handleModelClose, editAdmin }) => {
             try {
                 await axios.post(
                     "http://localhost:8080/api/v1/user/add/admin",
-                    adminDetails,
+                    { ...adminDetails, role: "admin" },
                     { withCredentials: true }
                 );
                 handleModelClose();
@@ -351,7 +351,7 @@ export const AdminEditModel = ({ handleModelClose, editAdmin }) => {
                                         onChange={onChangeHandler}
                                     >
                                         <option value="active">Active</option>
-                                        <option value="inactive">Inactive</option>
+                                        <option value="inactive">InActive</option>
                                     </select>
                                 </div>
 
