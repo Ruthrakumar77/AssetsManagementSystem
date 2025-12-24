@@ -1,5 +1,5 @@
 import express from "express"
-import { addUser, changePassword, deleteUser, editUser, getAllAdmins, getAllEmployees, updateUser } from "../controllers/userController.js"
+import { addUser, changePass, deleteUser, editUser, getAllAdmins, getAllEmployees, updateUser } from "../controllers/userController.js"
 import { verifyUser } from "../middlewares/verifyUser.js"
 import { checkRole } from "../middlewares/checkRole.js"
 
@@ -30,10 +30,10 @@ userRouter.delete("/delete/employee", verifyUser, checkRole(["admin", "super adm
 userRouter.delete("/delete/admin", verifyUser, checkRole(["super admin"]), deleteUser)
 
 // update
-userRouter.put("/update", verifyUser, updateUser)
+userRouter.put("/update", verifyUser, updateUser)  // user profile own updates
 
 // update password (using current password)
-userRouter.patch("/updatepassword", verifyUser, changePassword)
+userRouter.patch("/changepass", verifyUser, changePass)
 
 
 

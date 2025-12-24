@@ -46,7 +46,7 @@ export async function updateUser(req, res) {
     }
 }
 
-export async function changePassword(req, res) {
+export async function changePass(req, res) {
     try {
         const { user } = req  // coming from verifyUser middlewares
         if (!req.body) {

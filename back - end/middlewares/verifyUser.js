@@ -15,15 +15,15 @@ export const verifyUser = async (req, res, next) => {
           req.user = user
           next()
         } else {
-          return res.status(401).send({ message: "Access denined" })
+          return res.status(403).send({ message: "Invalid User" })
         }
       } else {
-        return res.status(401).send({ message: "Access denined" })
+        return res.status(401).send({ message: "Invalid Token" })
       }
     } else {
       return res.status(401).send({ message: "Access denined" })
     }
   } catch (error) {
-    return res.status(500).send({ message: "server errror", error: error.message })
+    return res.status(500).send({ message: "Server Error", error: error.message })
   }
 }
