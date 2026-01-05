@@ -28,21 +28,55 @@ export const addAssetModel = async (req, res) => {
     }
 }
 
+// export const editAssetModel = async (req, res) => {
+//     try {
+//         if (isEmptyBody(req.body)) return sendError(res, 400, "Body cannot be empty")
+
+//         const { id } = req.params
+//         if (!id || !mongoose.isValidObjectId(id)) return sendError(res, 400, "Invalid id")
+
+//         const updated = await AssetModel.findByIdAndUpdate(id, { $set: { ...req.body } }, { new: true, runValidators: true })
+//         if (!updated) return sendError(res, 400, "Asset Model Not Found")
+
+//         return sendSuccess(res, 200, { message: "Asset Model Updated" })
+//     } catch (error) {
+//         return sendError(res, 500, "Something went wrong", error)
+//     }
+// }
+
 export const editAssetModel = async (req, res) => {
     try {
-        if (isEmptyBody(req.body)) return sendError(res, 400, "Body cannot be empty")
+        if (!req.body || Object.keys(req.body).length === 0) {
+            return res.status(400).json({ error: "Body cannot be empty" });
+        }
 
-        const { id } = req.params
-        if (!id || !mongoose.isValidObjectId(id)) return sendError(res, 400, "Invalid id")
+        const { id } = req.params;
+        if (!id || !mongoose.isValidObjectId(id)) {
+            return res.status(400).json({ error: "Invalid id" });
+        }
 
-        const updated = await AssetModel.findByIdAndUpdate(id, { $set: { ...req.body } }, { new: true, runValidators: true })
-        if (!updated) return sendError(res, 400, "Asset Model Not Found")
+        const updated = await AssetModel.findByIdAndUpdate(
+            id,
+            { $set: req.body },
+            { new: true, runValidators: true }
+        );
 
-        return sendSuccess(res, 200, { message: "Asset Model Updated" })
+        if (!updated) {
+            return res.status(404).json({ error: "Asset Model Not Found" });
+        }
+
+        return res.status(200).json({
+            message: "Asset Model Updated",
+            data: updated
+        });
+
     } catch (error) {
-        return sendError(res, 500, "Something went wrong", error)
+        console.error("Edit Asset Model Error:", error);
+        return res.status(400).json({ error: error.message });
     }
-}
+};
+
+
 
 export const deleteAssetModel = async (req, res) => {
     try {

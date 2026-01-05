@@ -7,7 +7,7 @@ const assetModelSchema = new mongoose.Schema({
 
     manufacturer: { type: String },
 
-    depreciationMethod: { type: String, enum: ["straightline", "reducingbalance"], default: "straightline" },
+    depreciationMethod: { type: String, enum: ["straight_line", "reducing_balance"], default: "straight_line", required: true },
 
     usefulLifeYears: { type: Number, default: 3 },
 
