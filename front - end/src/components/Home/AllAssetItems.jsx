@@ -13,7 +13,7 @@ function AllAssetItems() {
     const [deleteLoading, setDeleteLoading] = useState(null)
 
     useEffect(() => {
-        fetchAllItems()
+        fetchAllItems();
     }, [id])
 
     async function fetchAllItems() {
@@ -24,7 +24,7 @@ function AllAssetItems() {
         } catch (error) {
             console.error("Failed to fetch items:", error)
         } finally {
-            setLoading(false)
+            setLoading(false);
         }
     }
 
